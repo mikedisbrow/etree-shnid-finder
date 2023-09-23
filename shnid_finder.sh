@@ -27,9 +27,12 @@ if [ $# -eq 0 ]
       # read fingerprint from flac file header
       fingerprint=$(metaflac --show-md5sum "$track")
       # search etreedb.org for fingerprint string, print SHN ID to stdout
-      shnid=$(wget -qO- https://etreedb.org/md5_lookup.php\?md5\="$fingerprint" | grep -A 1 '<td>Source #</td>' | tail -n 1 | sed -e 's/\(<[^<][^<]*>\)//g' | awk '{print $1}')
+      shnid=$(wget -qO- https://etreedb.org/md5_lookup.php\?md5\="$fingerprint" \
+        | grep -A 1 '<td>Source #</td>' | tail -n 1 | sed -e 's/\(<[^<][^<]*>\)//g' \
+        | awk '{print $1}')
       # grab unique portion of URL for shn ID
-      result=$(wget -qO- https://etreedb.org/md5_lookup.php\?md5\="$fingerprint"  | grep -oE "\/shn_downloadzip\.php\?shnid\=[0-9]+")
+      result=$(wget -qO- https://etreedb.org/md5_lookup.php\?md5\="$fingerprint" \
+        | grep -oE "\/shn_downloadzip\.php\?shnid\=[0-9]+")
       # print relatively unimportant info to stdout
         echo file: "$track"
         echo fingerprint: "$fingerprint"
@@ -44,9 +47,12 @@ if [ $# -eq 0 ]
     # read fingerprint from flac file header
     fingerprint=$(metaflac --show-md5sum "$1")
     # search etreedb.org for fingerprint string, print SHN ID to stdout
-    shnid=$(wget -qO- https://etreedb.org/md5_lookup.php\?md5\="$fingerprint" | grep -A 1 '<td>Source #</td>' | tail -n 1 | sed -e 's/\(<[^<][^<]*>\)//g' | awk '{print $1}')
+    shnid=$(wget -qO- https://etreedb.org/md5_lookup.php\?md5\="$fingerprint" \
+      | grep -A 1 '<td>Source #</td>' | tail -n 1 | sed -e 's/\(<[^<][^<]*>\)//g' \
+      | awk '{print $1}')
     # grab unique portion of URL for shn ID
-    result=$(wget -qO- https://etreedb.org/md5_lookup.php\?md5\="$fingerprint"  | grep -oE "\/shn_downloadzip\.php\?shnid\=[0-9]+")
+    result=$(wget -qO- https://etreedb.org/md5_lookup.php\?md5\="$fingerprint" \
+      | grep -oE "\/shn_downloadzip\.php\?shnid\=[0-9]+")
     # print relatively unimportant info to stdout
       echo file: "$1"
       echo fingerprint: "$fingerprint"
