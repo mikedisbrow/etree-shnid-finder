@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # shellcheck disable=SC1001
-# set -euo pipefail
+# set -x
 
 # requirements:
 # macOS     - use Homebrew (https://brew.sh)
 # metaflac  - brew install flac
-# wget      = brew install wget
+# wget      - brew install wget
 # grep, tail, sed, awk are probably already available, but can also be
 # installed with `brew install grep tail sed awk`
 #
